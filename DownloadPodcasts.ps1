@@ -25,6 +25,10 @@ $ShowData = @{
         'Path'     = 'urban-night-grooves'
         'Provider' = 'DeepRadioNetwork'
         'Day'      = 'Saturday' }
+	'NYDeepandSoulful' = @{
+        'Path'     = 'new-york-deep-and-soulful'
+        'Provider' = 'DeepRadioNetwork'
+        'Day'      = 'Saturday' }
 }
 
 ####
@@ -102,6 +106,7 @@ function DeepRadioNetwork {
         [Parameter()][string]$Log
     )
     $uri = "http://media.d3ep.com/dl.php?f=" + $ShowData[$Show].Path + '-' + $Date + '.mp3'
+    New-Item -Type Directory (Join-Path $store $Show) -ea Ignore | Out-Null
     $FileName = [IO.Path]::Combine($store,$Show,$Date) + '.mp3'
     
     try {
